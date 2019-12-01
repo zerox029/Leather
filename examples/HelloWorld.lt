@@ -1,0 +1,6 @@
+#link entry HelloWorld()
+
+func:void HelloWorld()
+{
+    Console.writeln("Hello World");
+}

@@ -5,13 +5,18 @@ import java.util.regex.Pattern;
 
 public enum Token {
 
+    //Single char tokens
     OPEN_BRACE("\\{"),
     CLOSE_BRACE("\\}"),
     OPEN_PARENTHESIS("\\("),
     CLOSE_PARENTHESIS("\\)"),
     SEMI_COLON(";"),
+
+    //Keyword tokens
     INT_KEYW("int"),
     RETURN_KEYW("return"),
+
+    //Identifier tokens
     IDENTIFIER("[a-zA-Z]\\w*"),
     INTEGER_LITERAL("[0-9]+");
 

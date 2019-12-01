@@ -90,7 +90,7 @@ public class Lexer {
         else
             return false;
     }
-
+    
     private Token matchSingleCharacterToken(char token)
     {
         for(Token t : Token.values())

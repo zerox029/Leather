@@ -17,6 +17,5 @@ public class Main {
 
     private void TraverseTree(Tree<String> tree)
     {
-        System.out.println(tree.getRoot())
     }
 }

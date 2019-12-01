@@ -1,0 +1,11 @@
+func:void doSomething() {
+    var:int a;
+
+    {
+        var:int b;
+        a = 1;
+    }
+
+    a = 2;
+    b = 3; // Illegal because the variable b is declared in an inner scope..
+}

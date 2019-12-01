@@ -1,0 +1,8 @@
+var:int count;       //Declaring an uninitialized variable called 'count', of type 'int'
+count = 35;          //Initializing the variable
+
+var:int count = 35;  //Declaring and initializing the variable at the same time
+
+
+var:int a, b;         //Declaring multiple variables of the same type
+var:int a = 2, b = 3; //Declaring and initializing multiple variables of the same type

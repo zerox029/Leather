@@ -13,7 +13,7 @@ public class Lexer {
     private List<Token> tokens = new ArrayList<>();
     private Set<Character> blankChars = new HashSet<Character>();
 
-    public void lex(String filePath)
+    public List<Token> lex(String filePath)
     {
         readFile(filePath);
 
@@ -51,10 +51,7 @@ public class Lexer {
             currentCheck.setLength(0);
         }
 
-        for(Token t : tokens)
-        {
-            System.out.println("[" + t + "] : " + t.getValue());
-        }
+        return tokens;
     }
 
     private void readFile(String filePath)

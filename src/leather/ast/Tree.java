@@ -11,7 +11,7 @@ public class Tree<T> {
         root = new Node<T>(rootData, new ArrayList<Node<T>>());
     }
 
-    public Queue<Node<T>> preOrderDFSTraversal()
+    public Queue<Node<T>> toQueuePreOrderDFS()
     {
         Queue<Node<T>> orderedNodes = new LinkedList<>();
         orderedNodes.add(root);
@@ -23,47 +23,44 @@ public class Tree<T> {
 
     private Queue<Node<T>> preOrderDfsTraverseChildren(Queue<Node<T>> orderedNodes, Node<T> currentNode)
     {
-        for(Node<T> child : currentNode.getChildren())
+        for(int i = 0; i < currentNode.getChildCount(); i++)
         {
-            if(!orderedNodes.contains(child))
+            if(!orderedNodes.contains(currentNode.getChildAtIndex(i)))
             {
-                currentNode = child;
-                orderedNodes.add(child);
-                orderedNodes = preOrderDfsTraverseChildren(orderedNodes, currentNode);
+                orderedNodes.add(currentNode.getChildAtIndex(i));
+                orderedNodes = preOrderDfsTraverseChildren(orderedNodes, currentNode.getChildAtIndex(i));
             }
         }
 
         return orderedNodes;
     }
 
-    public Queue<Node<T>> PostOrderDFSTraversal()
+    public Queue<Node<T>> toQueuePostOrderDFS()
     {
         Queue<Node<T>> orderedNodes = new LinkedList<>();
 
-        orderedNodes = postOrderDfsTraverseChildren(orderedNodes, root);
+        postOrderDfsTraverseChildren(orderedNodes, root);
 
         return orderedNodes;
     }
 
-    private Queue<Node<T>> postOrderDfsTraverseChildren(Queue<Node<T>> orderedNodes, Node<T> currentNode)
+    private void postOrderDfsTraverseChildren(Queue<Node<T>> orderedNodes, Node<T> currentNode)
     {
-        for(Node<T> child : currentNode.getChildren())
+        for(int i = 0; i < currentNode.getChildCount(); i++)
         {
-            if(!orderedNodes.contains(child))
+            //If it's a branch, loop through its children
+            if(currentNode.getChildAtIndex(i).getChildCount() != 0)
             {
-                if(child.getChildCount() == 0)
-                {
-                    //orderedNodes.add(child);
-                    orderedNodes = preOrderDfsTraverseChildren(orderedNodes, currentNode.getParent());
-                }
-                else
-                {
-                    preOrderDfsTraverseChildren(orderedNodes, child);
-                }
+                postOrderDfsTraverseChildren(orderedNodes, currentNode.getChildAtIndex(i));
+            }
+            //If it's a leaf, add it to the queue
+            else if(!orderedNodes.contains(currentNode.getChildAtIndex(i)))
+            {
+                orderedNodes.add(currentNode.getChildAtIndex(i));
             }
         }
 
-        return orderedNodes;
+        orderedNodes.add(currentNode);
     }
 
     public Node getRoot() { return root; }

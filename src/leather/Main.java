@@ -21,7 +21,7 @@ public class Main {
 
 
 
-        Queue<Node<String>> q = testTree.PostOrderDFSTraversal();
+        Queue<Node<String>> q = testTree.toQueuePostOrderDFS();
 
         for(Node<String> node : q)
         {

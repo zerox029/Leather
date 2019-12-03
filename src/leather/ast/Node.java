@@ -40,7 +40,9 @@ public class Node<T> {
 
     //Getters
     public int getChildCount() { return children.size(); }
+    public List<Node<T>> getChildren() { return children; }
     public Node<T> getFirstChild() { return children.get(0); }
     public Node<T> getChildAtIndex(int index) { return children.get(index); }
     public Node<T> getParent() { return parent; }
+    public T getData() { return data; }
 }

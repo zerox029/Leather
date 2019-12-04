@@ -28,11 +28,14 @@ public class Lexer {
             char currentChar = program.charAt(currentCharIndex);
             Token token = matchSingleCharacterToken(currentChar);
 
+            //Single character token
             if(token != null)
             {
                 if(currentCheck.length() > 0) { tokens.add(matchMultiCharacterToken(currentCheck.toString())); }
                 tokens.add(token);
             }
+
+            //Non token character
             else if(!isBlankCharacter(currentChar))
             {
                 currentCheck.append(program.charAt(currentCharIndex));
@@ -40,13 +43,15 @@ public class Lexer {
 
                 continue;
             }
+
+            //Keyword or identifier token
             else if(isBlankCharacter(currentChar) && currentCheck.length() > 0)
             {
                 token = matchMultiCharacterToken(currentCheck.toString());
                 if(token != null) { tokens.add(token); }
             }
 
-            program = program.substring(currentCharIndex + 1, program.length());
+            program = program.substring(currentCharIndex + 1);
             currentCharIndex = 0;
             currentCheck.setLength(0);
         }

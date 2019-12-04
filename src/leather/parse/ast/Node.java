@@ -1,6 +1,5 @@
-package leather.ast;
+package leather.parse.ast;
 
-import javax.lang.model.type.ArrayType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +20,6 @@ public class Node<T> {
         this.children = children;
     }
 
-    //Setters
-    public void setParent(Node<T> parent)
-    {
-        this.parent = parent;
-    }
     public void addChild(Node<T> child)
     {
         child.parent = this;
@@ -37,10 +31,19 @@ public class Node<T> {
         child.parent = this;
         children.add(child);
     }
+    public void addChild(Tree<T> tree)
+    {
+        children.add(tree.getRoot());
+    }
+
+    //Setters
+    public void setParent(Node<T> parent)
+    {
+        this.parent = parent;
+    }
 
     //Getters
     public int getChildCount() { return children.size(); }
-    public List<Node<T>> getChildren() { return children; }
     public Node<T> getFirstChild() { return children.get(0); }
     public Node<T> getChildAtIndex(int index) { return children.get(index); }
     public Node<T> getParent() { return parent; }

@@ -2,9 +2,10 @@ package tests.ast;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import leather.ast.Node;
-import leather.ast.Tree;
 import java.util.Queue;
+
+import leather.parse.ast.Node;
+import leather.parse.ast.Tree;
 
 class TreeTest {
 
@@ -13,7 +14,7 @@ class TreeTest {
     {
         //First test
         char[] expectedOutput = new char[]{'D', 'B', 'A', 'C', 'E', 'F'};
-        Queue<Node<Character>> actualOutput = makeTestTreeOne().toQueuePreOrderDFS();
+        Queue<Character> actualOutput = makeTestTreeOne().toQueuePreOrderDFS();
 
         assertEquals(expectedOutput.length, actualOutput.size());
         testContent(expectedOutput, actualOutput);
@@ -24,7 +25,7 @@ class TreeTest {
     {
         //First test
         char[] expectedOutput = new char[]{'D', 'B', 'A', 'C', 'G', 'E', 'F', 'H'};
-        Queue<Node<Character>> actualOutput = makeTestTreeTwo().toQueuePreOrderDFS();
+        Queue<Character> actualOutput = makeTestTreeTwo().toQueuePreOrderDFS();
 
         assertEquals(expectedOutput.length, actualOutput.size());
         testContent(expectedOutput, actualOutput);
@@ -35,7 +36,7 @@ class TreeTest {
     {
         //First test
         char[] expectedOutput = new char[]{'A', 'C', 'B', 'F', 'E', 'D'};
-        Queue<Node<Character>> actualOutput = makeTestTreeOne().toQueuePostOrderDFS();
+        Queue<Character> actualOutput = makeTestTreeOne().toQueuePostOrderDFS();
 
         assertEquals(expectedOutput.length, actualOutput.size());
         testContent(expectedOutput, actualOutput);
@@ -46,7 +47,7 @@ class TreeTest {
     {
         //First test
         char[] expectedOutput = new char[]{'A', 'C', 'G', 'B', 'H', 'F', 'E', 'D'};
-        Queue<Node<Character>> actualOutput = makeTestTreeTwo().toQueuePostOrderDFS();
+        Queue<Character> actualOutput = makeTestTreeTwo().toQueuePostOrderDFS();
 
         assertEquals(expectedOutput.length, actualOutput.size());
         testContent(expectedOutput, actualOutput);
@@ -81,11 +82,11 @@ class TreeTest {
     }
 
 
-    void testContent(char[] expected, Queue<Node<Character>> actual)
+    void testContent(char[] expected, Queue<Character> actual)
     {
         for(int i = 0; i < expected.length; i++)
         {
-            assertEquals(actual.remove().getData(), expected[i]);
+            assertEquals(actual.remove(), expected[i]);
         }
     }
 }

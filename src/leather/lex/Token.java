@@ -13,8 +13,8 @@ public enum Token {
     SEMI_COLON(";"),
 
     //Keyword tokens
-    INT_KEYW("int"),
-    RETURN_KEYW("return"),
+    INT_KW("int"),
+    RETURN_KW("return"),
 
     //Identifier tokens
     IDENTIFIER("[a-zA-Z]\\w*"),
@@ -29,7 +29,12 @@ public enum Token {
     {
         mPattern = Pattern.compile("^" + regex);
 
-        if(regex.charAt(0) == '\\' && regex.length() > 1) { regex = regex.substring(1, regex.length()); }
+        //Removing the "\" used by regex, for an accurate length count
+        if(regex.charAt(0) == '\\' && regex.length() > 1)
+        {
+            regex = regex.substring(1, regex.length());
+        }
+
         mPatternLength = regex.length();
     }
 
@@ -40,8 +45,8 @@ public enum Token {
         return matcher.matches();
     }
 
-    public int getPatternLength() { return mPatternLength; }
-
     public void setValue(String val) { mValue = val; }
     public String getValue() { return mValue; }
+
+    public int getPatternLength() { return mPatternLength; }
 }

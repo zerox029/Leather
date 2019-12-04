@@ -1,4 +1,4 @@
-package leather.ast;
+package leather.parse.ast;
 
 import java.util.*;
 
@@ -10,40 +10,38 @@ public class Tree<T> {
         root = new Node<T>(rootData, new ArrayList<Node<T>>());
     }
 
-    public Queue<Node<T>> toQueuePreOrderDFS()
+    //Tree traversal methods
+    public Queue<T> toQueuePreOrderDFS()
     {
-        Queue<Node<T>> orderedNodes = new LinkedList<>();
-        orderedNodes.add(root);
+        Queue<T> orderedNodes = new LinkedList<>();
+        orderedNodes.add(root.getData());
 
         orderedNodes = preOrderDfsTraverseChildren(orderedNodes, root);
 
         return orderedNodes;
     }
-
-    private Queue<Node<T>> preOrderDfsTraverseChildren(Queue<Node<T>> orderedNodes, Node<T> currentNode)
+    private Queue<T> preOrderDfsTraverseChildren(Queue<T> orderedNodes, Node<T> currentNode)
     {
         for(int i = 0; i < currentNode.getChildCount(); i++)
         {
             if(!orderedNodes.contains(currentNode.getChildAtIndex(i)))
             {
-                orderedNodes.add(currentNode.getChildAtIndex(i));
+                orderedNodes.add(currentNode.getChildAtIndex(i).getData());
                 orderedNodes = preOrderDfsTraverseChildren(orderedNodes, currentNode.getChildAtIndex(i));
             }
         }
 
         return orderedNodes;
     }
-
-    public Queue<Node<T>> toQueuePostOrderDFS()
+    public Queue<T> toQueuePostOrderDFS()
     {
-        Queue<Node<T>> orderedNodes = new LinkedList<>();
+        Queue<T> orderedNodes = new LinkedList<>();
 
         postOrderDfsTraverseChildren(orderedNodes, root);
 
         return orderedNodes;
     }
-
-    private void postOrderDfsTraverseChildren(Queue<Node<T>> orderedNodes, Node<T> currentNode)
+    private void postOrderDfsTraverseChildren(Queue<T> orderedNodes, Node<T> currentNode)
     {
         for(int i = 0; i < currentNode.getChildCount(); i++)
         {
@@ -55,11 +53,11 @@ public class Tree<T> {
             //If it's a leaf, add it to the queue
             else if(!orderedNodes.contains(currentNode.getChildAtIndex(i)))
             {
-                orderedNodes.add(currentNode.getChildAtIndex(i));
+                orderedNodes.add(currentNode.getChildAtIndex(i).getData());
             }
         }
 
-        orderedNodes.add(currentNode);
+        orderedNodes.add(currentNode.getData());
     }
 
     public Node getRoot() { return root; }

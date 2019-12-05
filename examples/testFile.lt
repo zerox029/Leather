@@ -1,3 +1,3 @@
-int main() {
-    return 273;
+func hy() {
+    return 22;
 }

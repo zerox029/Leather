@@ -13,20 +13,14 @@ public class AbstractSyntaxTree {
 
         while(tokens.size() > 0)
         {
-            Token top = tokens.remove();
+            Token top = tokens.peek();
 
-            if(top == Token.RETURN_KW)
+            switch (top)
             {
-                if(tokens.peek() == Token.INTEGER_LITERAL)
-                {
-                    Return ret = new Return(tokens.remove());
-                    ast.getRoot().addChild(ret.getStructure());
-                }
-                else
-                {
-                    System.out.println("Invalid code");
-                    break;
-                }
+                case RETURN_KW:
+                    ast.getRoot().addChild(new Return(tokens).getStructureRoot());
+                case FUNC_KW:
+                    ast.getRoot().addChild(new Function(tokens).getStructureRoot());
             }
         }
 

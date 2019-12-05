@@ -13,7 +13,7 @@ public enum Token {
     SEMI_COLON(";"),
 
     //Keyword tokens
-    INT_KW("int"),
+    FUNC_KW("func"),
     RETURN_KW("return"),
 
     //Identifier tokens

@@ -1,52 +1,30 @@
 package leather.lex;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+public class Token
+{
+    Tokens type;
+    String value;
 
-public enum Token {
+    String fileName;
 
-    //Single char tokens
-    OPEN_BRACE("\\{"),
-    CLOSE_BRACE("\\}"),
-    OPEN_PARENTHESIS("\\("),
-    CLOSE_PARENTHESIS("\\)"),
-    SEMI_COLON(";"),
-
-    //Keyword tokens
-    FUNC_KW("func"),
-    RETURN_KW("return"),
-
-    //Identifier tokens
-    IDENTIFIER("[a-zA-Z]\\w*"),
-    INTEGER_LITERAL("[0-9]+");
-
-    private final Pattern mPattern;
-    private final int mPatternLength;
-
-    private String mValue;
-
-    Token(String regex)
+    public Token(Tokens type, String value)
     {
-        mPattern = Pattern.compile("^" + regex);
-
-        //Removing the "\" used by regex, for an accurate length count
-        if(regex.charAt(0) == '\\' && regex.length() > 1)
-        {
-            regex = regex.substring(1, regex.length());
-        }
-
-        mPatternLength = regex.length();
+        this.type = type;
+        this.value = value;
     }
 
-    public boolean matches(String matchingCandidate)
+    public Token(Tokens type, String value, String fileName)
     {
-        Matcher matcher = mPattern.matcher(matchingCandidate);
-
-        return matcher.matches();
+        this.type = type;
+        this.value = value;
+        this.fileName = fileName;
     }
 
-    public void setValue(String val) { mValue = val; }
-    public String getValue() { return mValue; }
+    public String getValue() { return value; }
+    public void setValue(String val) { value = val; }
 
-    public int getPatternLength() { return mPatternLength; }
+    public Tokens getType() { return type; }
+    public void setType(Token token) { this.type = type; }
+
+    public String getFileName() { return fileName; }
 }

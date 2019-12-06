@@ -2,6 +2,7 @@ package leather.lex;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -10,11 +11,13 @@ import java.util.stream.Collectors;
 
 public class Lexer {
     private String program;
+    private String fileName;
     private List<Token> tokens = new ArrayList<>();
     private Set<Character> blankChars = new HashSet<Character>();
 
     public List<Token> lex(String filePath)
     {
+        fileName = readFileName(filePath);
         readFile(filePath);
 
         fillBlankCharset();
@@ -59,6 +62,11 @@ public class Lexer {
         return tokens;
     }
 
+    private String readFileName(String filePath)
+    {
+        return Paths.get(filePath).getFileName().toString();
+    }
+
     private void readFile(String filePath)
     {
         try
@@ -93,28 +101,28 @@ public class Lexer {
             return false;
     }
     
-    private Token matchSingleCharacterToken(char token)
+    private Token matchSingleCharacterToken(char tokenChar)
     {
-        for(Token t : Token.values())
+        for(Tokens t : Tokens.values())
         {
-            if(t.getPatternLength() == 1 && t.matches(String.valueOf(token)))
+            if(t.getPatternLength() == 1 && t.matches(String.valueOf(tokenChar)))
             {
-                t.setValue(String.valueOf(token));
-                return t;
+                Token token = new Token(t, String.valueOf(tokenChar), fileName);
+                return token;
             }
         }
 
         return null;
     }
 
-    private Token matchMultiCharacterToken(String token)
+    private Token matchMultiCharacterToken(String tokenString)
     {
-        for(Token t : Token.values())
+        for(Tokens t : Tokens.values())
         {
-            if(t.getPatternLength() > 1 && t.matches(token))
+            if(t.getPatternLength() > 1 && t.matches(tokenString))
             {
-                t.setValue(token);
-                return t;
+                Token token = new Token(t, tokenString, fileName);
+                return token;
             }
         }
 

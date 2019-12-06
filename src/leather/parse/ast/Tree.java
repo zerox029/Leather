@@ -9,6 +9,7 @@ public class Tree<T> {
     {
         root = new Node<T>(rootData, new ArrayList<Node<T>>());
     }
+    public Tree(Node<T> root) { this.root = root; }
 
     //Tree traversal methods
     public Queue<T> toQueuePreOrderDFS()

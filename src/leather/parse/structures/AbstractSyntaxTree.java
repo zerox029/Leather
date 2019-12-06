@@ -9,13 +9,13 @@ import java.util.Queue;
 public class AbstractSyntaxTree {
     public static Tree<Token> generateTreeFromTokenQueue(Queue<Token> tokens)
     {
-        Tree<Token> ast = new Tree<>(Token.IDENTIFIER);
+        Tree<Token> ast = new Tree<>(new Program().getStructureRoot());
 
         while(tokens.size() > 0)
         {
             Token top = tokens.peek();
 
-            switch (top)
+            switch (top.getType())
             {
                 case RETURN_KW:
                     ast.getRoot().addChild(new Return(tokens).getStructureRoot());

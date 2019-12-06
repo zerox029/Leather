@@ -20,7 +20,7 @@ public class Main {
 
         for(Token s : tokenQueue)
         {
-            System.out.println("[" + s + "] " + s.getValue());
+            System.out.println("[" + s.getType() + "] " + s.getValue() + " -> " + s.getFileName());
         }
 
     }

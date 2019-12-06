@@ -1,6 +1,6 @@
 package leather.parse.structures;
 
-import leather.lex.Token;
+import leather.lex.*;
 import leather.parse.ast.*;
 
 public abstract class Structure {
@@ -8,15 +8,15 @@ public abstract class Structure {
 
     public Node<Token> getStructureRoot() { return structureRoot; }
 
-    public void addTokenIfValid(Token expected, Token actual, String errorMessage)
+    public void addTokenIfValid(Tokens expected, Token actual, String errorMessage)
     {
         checkTokenValidity(expected, actual, errorMessage);
-        structureRoot.addChild(expected);
+        structureRoot.addChild(actual);
     }
 
-    public void checkTokenValidity(Token expected, Token actual, String errorMessage)
+    public void checkTokenValidity(Tokens expected, Token actual, String errorMessage)
     {
-        if(actual != expected)
+        if(actual.getType() != expected)
         {
             throw new IllegalArgumentException(errorMessage);
         }

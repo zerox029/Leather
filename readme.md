@@ -4,18 +4,18 @@ A small compiled programming language developed by Étienne Plante
 
 ------------
 
-**&lt;program&gt;::=** &lt;variable-declaration&gt; | &lt;function-declaration&gt;\n
-**&lt;statement&gt;::=** &lt;variable-declaration&gt;\n
-**&lt;variable-declaration&gt;::=** &lt;variable-keyword&gt; : &lt;variable-type&gt; &lt;identifier&gt; = &lt;variable-body&gt; ;\n
-**&lt;identifier&gt;::=** 1\*&lt;letter&gt;\n
-**&lt;variable-body&gt;::=** &lt;letter&gt; | &lt;number&gt; | &lt;boolean&gt;\n
-**&lt;function-declaration&gt;::=** &lt;function-keyword&gt; : &lt;data-type&gt; ( { &lt;argument&gt; } ) { {&lt;statement&gt;} }\n
-**&lt;argument&gt;::=** &lt;variable-keyword&gt; : &lt;data-type&gt; &lt;identifier&gt; {"," &lt;argument&gt;}\n
-**&lt;variable-keyword&gt;::=** var\n
-**&lt;function-keyword&gt;::=** func\n
-**&lt;data-type&gt;::=** int | bool | char\n
-**&lt;letter&gt;::=** [a-zA-Z]+\n
-**&lt;number&gt;::=** [0-9]+\n
+**&lt;program&gt;::=** &lt;variable-declaration&gt; | &lt;function-declaration&gt;  
+**&lt;statement&gt;::=** &lt;variable-declaration&gt;  
+**&lt;variable-declaration&gt;::=** &lt;variable-keyword&gt; : &lt;variable-type&gt; &lt;identifier&gt; = &lt;variable-body&gt; ;  
+**&lt;identifier&gt;::=** 1\*&lt;letter&gt;  
+**&lt;variable-body&gt;::=** &lt;letter&gt; | &lt;number&gt; | &lt;boolean&gt;  
+**&lt;function-declaration&gt;::=** &lt;function-keyword&gt; : &lt;data-type&gt; ( { &lt;argument&gt; } ) { {&lt;statement&gt;} }  
+**&lt;argument&gt;::=** &lt;variable-keyword&gt; : &lt;data-type&gt; &lt;identifier&gt; {"," &lt;argument&gt;}  
+**&lt;variable-keyword&gt;::=** var  
+**&lt;function-keyword&gt;::=** func  
+**&lt;data-type&gt;::=** int | bool | char  
+**&lt;letter&gt;::=** [a-zA-Z]+  
+**&lt;number&gt;::=** [0-9]+  
 
 ## Examples of working programs
 ### Hello world

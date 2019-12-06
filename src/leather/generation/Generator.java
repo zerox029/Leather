@@ -3,6 +3,12 @@ package leather.generation;
 import leather.lex.Token;
 import leather.parse.ast.Tree;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -10,8 +16,7 @@ public class Generator {
     Queue<Token> tokenQueue = new LinkedList<>();
     StringBuilder assembly = new StringBuilder();
 
-    public String generateAssembly(Tree<Token> ast)
-    {
+    public void generateAssembly(Tree<Token> ast) throws IOException {
         tokenQueue = ast.toQueuePreOrderDFS();
 
         while (tokenQueue.size() > 0)
@@ -29,7 +34,8 @@ public class Generator {
             }
         }
 
-        return assembly.toString();
+        Path filePath = Paths.get("assembly.s");
+        Files.write(filePath, assembly.toString().getBytes());
     }
 
     public String generateFunction()

@@ -1,9 +1,11 @@
 package leather;
 
+import leather.generation.Generator;
 import leather.lex.Lexer;
 import leather.lex.Token;
 import leather.parse.ast.Tree;
 import leather.parse.structures.*;
+import org.junit.jupiter.engine.descriptor.ClassTestDescriptor;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -16,12 +18,16 @@ public class Main {
         List<Token> tokens = lexer.lex("examples/testFile.lt");
 
         Tree<Token> ast = AbstractSyntaxTree.generateTreeFromTokenQueue(new LinkedList<>(tokens));
-        Queue<Token> tokenQueue = ast.toQueuePreOrderDFS();
+        Generator gen = new Generator();
+        String assembly = gen.generateAssembly(ast);
 
+        System.out.print(assembly);
+
+        /*
         for(Token s : tokenQueue)
         {
             System.out.println("[" + s.getType() + "] " + s.getValue() + " -> " + s.getFileName());
-        }
+        }*/
 
     }
 }

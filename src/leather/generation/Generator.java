@@ -16,7 +16,7 @@ public class Generator {
     Queue<Token> tokenQueue = new LinkedList<>();
     StringBuilder assembly = new StringBuilder();
 
-    public void generateAssembly(Tree<Token> ast) throws IOException {
+    public void generateAssembly(Tree<Token> ast, String path) throws IOException {
         tokenQueue = ast.toQueuePreOrderDFS();
 
         while (tokenQueue.size() > 0)
@@ -34,14 +34,18 @@ public class Generator {
             }
         }
 
-        Path filePath = Paths.get("assembly.s");
+        assembly.append("\n");
+
+        Path filePath = Paths.get(path + "/../assembly.s");
         Files.write(filePath, assembly.toString().getBytes());
     }
 
     public String generateFunction()
     {
+        String functionName = tokenQueue.remove().getValue();
+
         StringBuilder toAppend = new StringBuilder(".globl ");
-        toAppend.append("_" + tokenQueue.remove().getValue() + ":\n  ");
+        toAppend.append(functionName + "\n" + functionName + ":\n  ");
 
         return toAppend.toString();
     }

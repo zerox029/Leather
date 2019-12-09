@@ -11,17 +11,13 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import leather.LLC;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        Lexer lexer = new Lexer();
-        List<Token> tokens = lexer.lex("examples/testFile.lt");
-
-        Tree<Token> ast = AbstractSyntaxTree.generateTreeFromTokenQueue(new LinkedList<>(tokens));
-        Generator gen = new Generator();
-        gen.generateAssembly(ast);
-
+    public static void main(String[] args) throws IOException
+    {
+        LLC.toAssembly("testFile.lt");
         /*
         for(Token s : tokenQueue)
         {
